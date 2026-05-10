@@ -1,18 +1,21 @@
-
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moon Dance — Формейшн Бүжгийн Хамтлаг</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #040405;
+    --black: #050508;
     --dark: #0a0a10;
     --card: #0f0f18;
     --border: rgba(0,255,160,0.15);
-    --green: #84bdff;
-    --green-dim: rgb(169, 187, 246);
+    --green: #66b8f3;
+    --green-dim: rgb(60, 31, 249);
     --gold: #ffffff;
     --white: #f0ede8;
-    --muted: rgb(114, 187, 244);
+    --muted: rgb(127, 172, 255);
     --glass: rgba(15,15,24,0.85);
   }
 
@@ -107,6 +110,7 @@
     50% { transform: translateY(-18px) rotate(3deg); }
   }
 
+  /* Stars */
   .stars {
     position: absolute; inset: 0;
     overflow: hidden;
@@ -538,6 +542,270 @@
   }
 
   /* ─── RESPONSIVE ─── */
+  /* ─── REGISTRATION ─── */
+  .register { background: var(--black); }
+
+  .reg-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .reg-info { position: sticky; top: 8rem; }
+
+  .pricing-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  .price-card {
+    background: var(--card);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+  .price-card:hover { background: #13131e; }
+  .price-card.featured {
+    background: rgba(0,255,160,0.04);
+    border-left: 2px solid var(--green);
+  }
+
+  .price-label { font-size: 1rem; color: var(--white); }
+  .price-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.1em;
+  }
+  .price-amount {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--green);
+    white-space: nowrap;
+  }
+  .price-amount small {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    font-weight: 400;
+    display: block;
+    text-align: right;
+    margin-top: 0.2rem;
+  }
+
+  /* Multi-step form */
+  .reg-form-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .form-steps {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-step-indicator {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    position: relative;
+    transition: color 0.3s;
+  }
+  .form-step-indicator.active { color: var(--green); }
+  .form-step-indicator.done { color: var(--gold); }
+  .form-step-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .form-step-indicator.active::after { transform: scaleX(1); }
+
+  .form-body { padding: 2.5rem; }
+
+  .form-step { display: none; animation: fadeIn 0.4s ease; }
+  .form-step.active { display: block; }
+
+  .form-group { margin-bottom: 1.5rem; }
+
+  .form-label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .form-select, .form-input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.9rem 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .form-select:focus, .form-input:focus {
+    border-color: var(--green);
+    background: rgba(0,255,160,0.03);
+  }
+  .form-select option { background: #0f0f18; color: var(--white); }
+
+  .select-wrapper { position: relative; }
+  .select-arrow {
+    position: absolute;
+    right: 1rem; top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--green);
+    font-size: 0.7rem;
+  }
+
+  .slot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    max-height: 280px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) transparent;
+  }
+
+  .slot-btn {
+    padding: 0.7rem 0.9rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .slot-btn:hover { background: rgba(0,255,160,0.05); color: var(--white); border-color: rgba(0,255,160,0.3); }
+  .slot-btn.selected { background: rgba(0,255,160,0.1); color: var(--green); border-color: var(--green); }
+  .slot-btn .slot-class { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: inherit; display: block; margin-top: 0.2rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn-next, .btn-back, .btn-submit {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-next, .btn-submit {
+    background: var(--green);
+    color: var(--black);
+    font-weight: 700;
+  }
+  .btn-next:hover, .btn-submit:hover { background: #00cc80; transform: translateY(-1px); }
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-back:hover { border-color: var(--white); color: var(--white); }
+
+  .summary-box {
+    background: rgba(0,255,160,0.04);
+    border: 1px solid rgba(0,255,160,0.2);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row span:first-child { color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; }
+  .summary-row span:last-child { color: var(--white); }
+
+  /* Success screen */
+  .reg-success {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .reg-success.show { display: block; animation: fadeUp 0.8s ease forwards; }
+  .success-moon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    animation: moonFloat 3s ease-in-out infinite;
+  }
+  .success-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .success-title em { font-style: italic; color: var(--green); }
+  .success-id {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(212,175,114,0.3);
+    display: inline-block;
+  }
+
+  .step-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .reg-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    .reg-info { position: static; }
+    .form-row { grid-template-columns: 1fr; }
+    .slot-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── END REGISTRATION ─── */
+
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-links.open {
@@ -579,6 +847,7 @@
     <li><a href="#about">Тухай</a></li>
     <li><a href="#achievements">Амжилт</a></li>
     <li><a href="#branches">Салбарууд</a></li>
+    <li><a href="#register">Бүртгэл</a></li>
     <li><a href="#contact">Холбоо барих</a></li>
   </ul>
   <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
@@ -638,7 +907,7 @@
   <h2 class="section-title">3 <em>салбар,</em> нэг зүрх</h2>
 
   <div class="branch-tabs">
-    <button class="branch-tab active" onclick="switchBranch(0)">◈ Салбар 1 — Төв</button>
+    <button class="branch-tab active" onclick="switchBranch(0)">🌙 Салбар 1 — Төв</button>
     <button class="branch-tab" onclick="switchBranch(1)">✦ Салбар 2 — Баянзүрх</button>
     <button class="branch-tab" onclick="switchBranch(2)">◈ Салбар 3 — Сүхбаатар</button>
   </div>
@@ -646,11 +915,11 @@
   <!-- BRANCH 1 -->
   <div class="branch-content active" id="branch-0">
     <div class="branch-header">
-      <div class="branch-name">Салбар 1<br><em>Баянгол дүүрэг</em></div>
+      <div class="branch-name">Салбар 1<br><em>Төв дүүрэг</em></div>
       <div class="branch-info">
-        <div>Хаяг: <strong>Баянгол дүүрэг, Парадоксийн автобусны буудлын урд, Бүжин төвийн оргетгел 2 давхарт</strong></div>
+        <div>Хаяг: <strong>Энхтайваны өргөн чөлөө 5</strong></div>
         <div>Утас: <strong>+976 9911-0001</strong></div>
-        <div>Нийт сурагч: <strong>20</strong></div>
+        <div>Нийт сурагч: <strong>120+</strong></div>
       </div>
     </div>
     <p class="schedule-title">Хичээлийн хуваарь — Долоо хоног бүр</p>
@@ -733,9 +1002,9 @@
     <div class="branch-header">
       <div class="branch-name">Салбар 2<br><em>Баянзүрх дүүрэг</em></div>
       <div class="branch-info">
-        <div>Хаяг: <strong>ХСҮТ-ийн урд, J-Mall З давхарт</strong></div>
+        <div>Хаяг: <strong>Нарантуул зах орчим, 7-р хороо</strong></div>
         <div>Утас: <strong>+976 9911-0002</strong></div>
-        <div>Нийт сурагч: <strong>20</strong></div>
+        <div>Нийт сурагч: <strong>85+</strong></div>
       </div>
     </div>
     <p class="schedule-title">Хичээлийн хуваарь — Долоо хоног бүр</p>
@@ -811,7 +1080,7 @@
       <div class="branch-info">
         <div>Хаяг: <strong>Их Дэлхий, 1-р хороо</strong></div>
         <div>Утас: <strong>+976 9911-0003</strong></div>
-        <div>Нийт сурагч: <strong>20</strong></div>
+        <div>Нийт сурагч: <strong>70+</strong></div>
       </div>
     </div>
     <p class="schedule-title">Хичээлийн хуваарь — Долоо хоног бүр</p>
@@ -881,23 +1150,181 @@
   </div>
 </section>
 
+<!-- REGISTRATION -->
+<section class="register" id="register">
+  <p class="section-label">Элсэлт · Бүртгэл</p>
+  <h2 class="section-title">Манай <em>гэр бүлд</em><br>нэгдээрэй</h2>
+
+  <div class="reg-wrapper">
+
+    <!-- LEFT: pricing info -->
+    <div class="reg-info">
+      <p style="color:var(--muted);font-size:1.05rem;line-height:1.8;margin-bottom:2rem;">Moon Dance клубт элсэн орж, дэлхийн тавцанд гэрэлтдэг хамтлагийн нэг хэсэг болоорой. Бүх насны, бүх түвшний сурагчдыг хүлээн авна.</p>
+
+      <p class="section-label" style="margin-bottom:1rem;">Сарын төлбөр</p>
+      <div class="pricing-cards">
+        <div class="price-card">
+          <div>
+            <div class="price-label">Хүүхдийн анги</div>
+            <div class="price-sub">5–17 нас · 7 хоног бүр</div>
+          </div>
+          <div class="price-amount">₮80,000 <small>/ сар</small></div>
+        </div>
+        <div class="price-card featured">
+          <div>
+            <div class="price-label">Насанд хүрэгчид</div>
+            <div class="price-sub">18+ нас · 7 хоног бүр</div>
+          </div>
+          <div class="price-amount">₮90,000 <small>/ сар</small></div>
+        </div>
+        <div class="price-card">
+          <div>
+            <div class="price-label">Тэмцээний баг</div>
+            <div class="price-sub">Шилэгдсэн · Өдөр бүр</div>
+          </div>
+          <div class="price-amount">₮120,000 <small>/ сар</small></div>
+        </div>
+        <div class="price-card">
+          <div>
+            <div class="price-label">Туршилтын хичээл</div>
+            <div class="price-sub">Нэг удаагийн · Аль ч анги</div>
+          </div>
+          <div class="price-amount">₮15,000 <small>/ нэг</small></div>
+        </div>
+      </div>
+
+      <p style="font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted);margin-top:1.5rem;line-height:2;letter-spacing:0.05em;">
+        ✦ Бүртгүүлсний дараа 1 долоо хоногийн дотор холбоо барина<br>
+        ✦ Эхний сараас эхлэн төлбөр төлнө<br>
+        ✦ Тэмцээний зардал тусдаа тооцогдоно
+      </p>
+    </div>
+
+    <!-- RIGHT: multi-step form -->
+    <div class="reg-form-wrap">
+
+      <!-- Step indicators -->
+      <div class="form-steps">
+        <div class="form-step-indicator active" id="ind-0">01 · САЛБАР & ХУВААРЬ</div>
+        <div class="form-step-indicator" id="ind-1">02 · ХУВИЙН МЭДЭЭЛЭЛ</div>
+        <div class="form-step-indicator" id="ind-2">03 · БАТАЛГААЖУУЛАХ</div>
+      </div>
+
+      <div class="form-body">
+
+        <!-- STEP 1: Branch & Schedule -->
+        <div class="form-step active" id="step-0">
+          <div class="form-group">
+            <label class="form-label">Салбар сонгох</label>
+            <div class="select-wrapper">
+              <select class="form-select" id="sel-branch" onchange="updateSlots()">
+                <option value="">— Салбар сонгоно уу —</option>
+                <option value="0">Салбар 1 — Төв дүүрэг</option>
+                <option value="1">Салбар 2 — Баянзүрх дүүрэг</option>
+                <option value="2">Салбар 3 — Сүхбаатар дүүрэг</option>
+              </select>
+              <span class="select-arrow">▼</span>
+            </div>
+          </div>
+
+          <div class="form-group" id="slots-group" style="display:none;">
+            <label class="form-label">Хичээлийн цаг сонгох</label>
+            <p class="step-note" style="margin-bottom:0.8rem;">Нэг буюу хэд хэдэн цаг сонгож болно</p>
+            <div class="slot-grid" id="slot-grid"></div>
+          </div>
+
+          <div class="form-nav">
+            <div></div>
+            <button class="btn-next" onclick="nextStep(1)">Үргэлжлүүлэх →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Personal info -->
+        <div class="form-step" id="step-1">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Овог</label>
+              <input class="form-input" type="text" id="inp-last" placeholder="Овог нэр">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Нэр</label>
+              <input class="form-input" type="text" id="inp-first" placeholder="Өөрийн нэр">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Нас</label>
+              <input class="form-input" type="number" id="inp-age" placeholder="Жишээ: 12" min="3" max="99">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Утасны дугаар</label>
+              <input class="form-input" type="tel" id="inp-phone" placeholder="+976 ×××× ××××">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Хэн хаанаас мэдсэн бэ?</label>
+            <div class="select-wrapper">
+              <select class="form-select" id="inp-source">
+                <option value="">— Сонгоно уу —</option>
+                <option>Instagram / Facebook</option>
+                <option>Найз, танилаараа</option>
+                <option>YouTube</option>
+                <option>Тэмцээнд үзсэн</option>
+                <option>Бусад</option>
+              </select>
+              <span class="select-arrow">▼</span>
+            </div>
+          </div>
+          <div class="form-nav">
+            <button class="btn-back" onclick="nextStep(0)">← Буцах</button>
+            <button class="btn-next" onclick="nextStep(2)">Үргэлжлүүлэх →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Confirm -->
+        <div class="form-step" id="step-2">
+          <p class="step-note" style="margin-bottom:1.2rem;">Мэдээллээ шалгаад баталгаажуулна уу</p>
+          <div class="summary-box" id="summary-box"></div>
+          <div class="form-nav">
+            <button class="btn-back" onclick="nextStep(1)">← Буцах</button>
+            <button class="btn-submit" onclick="submitReg()">✓ Бүртгүүлэх</button>
+          </div>
+        </div>
+
+      </div><!-- /form-body -->
+
+      <!-- Success -->
+      <div class="reg-success" id="reg-success">
+        <span class="success-moon">🌙</span>
+        <div class="success-title">Амжилттай <em>бүртгэгдлээ!</em></div>
+        <p style="color:var(--muted);font-size:1rem;max-width:380px;margin:1rem auto;line-height:1.8;">Таны мэдээллийг хүлээн авлаа. Ойрын 1–2 өдрийн дотор манай менежер тантай холбоо барина.</p>
+        <div class="success-id" id="success-id">БҮРТГЭЛИЙН ДУГААР: —</div>
+        <div style="margin-top:2rem;">
+          <button class="btn-next" onclick="resetForm()" style="font-size:0.6rem;padding:0.8rem 1.5rem;">+ Дахин бүртгүүлэх</button>
+        </div>
+      </div>
+
+    </div><!-- /reg-form-wrap -->
+  </div><!-- /reg-wrapper -->
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <p class="section-label">Холбоо барих +96662253</p>
+  <p class="section-label">Холбоо барих +976 96662253</p>
   <h2 class="section-title">Биднийг <em>дагаарай</em></h2>
-  <p style="color: var(--muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto;">Хамгийн сүүлийн үеийн мэдээ мэдээлэл, бүжгийн тоглолтуудыг дагаж авна уу.</p>
+  <p style="color: var(--muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto;">Хамгийн сүүлийн үеийн мэдээ, бүжгийн тоглолтуудыг дагаж авна уу.</p>
   <div class="social-links">
     <a href="https://instagram.com/moondancemongolia" target="_blank" class="social-link">
-      <span class="social-icon"></span>
-      <span>📸 Instagram</span>
+      <span class="social-icon">📸</span>
+      <span>Instagram</span>
     </a>
     <a href="https://www.facebook.com/moondancemongolia" target="_blank" class="social-link">
-      <span class="social-icon"></span>
-      <span>👥 Facebook</span>
+      <span class="social-icon">👥</span>
+      <span>Facebook</span>
     </a>
     <a href="https://www.youtube.com/@moondancemongolia5334" target="_blank" class="social-link">
-      <span class="social-icon"></span>
-      <span>▶ YouTube</span>
+      <span class="social-icon">▶</span>
+      <span>YouTube</span>
     </a>
   </div>
 </section>
@@ -956,7 +1383,151 @@
     document.getElementById('navToggle').classList.remove('open');
   }));
 
-  // Intersection observer for fade-in
+  // ─── REGISTRATION LOGIC ───
+  const BRANCHES = [
+    {
+      name: 'Салбар 1 — Төв дүүрэг',
+      slots: [
+        { day: 'Даваа', time: '16:00–17:30', cls: 'Латин Формейшн', level: 'Дунд·Дэвшилтэт' },
+        { day: 'Даваа', time: '18:00–19:30', cls: 'Стандарт Формейшн', level: 'Анхан шат' },
+        { day: 'Мягмар', time: '15:00–16:30', cls: 'Хүүхдийн бүжиг', level: '6–12 нас' },
+        { day: 'Мягмар', time: '17:00–18:30', cls: 'Ча-ча-ча', level: 'Анхан шат' },
+        { day: 'Мягмар', time: '19:00–20:30', cls: 'Румба · Самба', level: 'Дунд шат' },
+        { day: 'Лхагва', time: '16:00–17:30', cls: 'Валс · Танго', level: 'Стандарт анхан' },
+        { day: 'Лхагва', time: '18:00–20:00', cls: 'Формейшн дасгал', level: 'Тэмцээний баг' },
+        { day: 'Пүрэв', time: '15:30–17:00', cls: 'Хүүхдийн бүжиг', level: '13–17 нас' },
+        { day: 'Пүрэв', time: '17:30–19:00', cls: 'Пасодобль · Жайв', level: 'Дэвшилтэт' },
+        { day: 'Баасан', time: '16:00–18:00', cls: 'Нийт дасгал', level: 'Бүх түвшин' },
+        { day: 'Баасан', time: '18:30–20:00', cls: 'Насанд хүрэгчид', level: 'Дебют анги' },
+      ]
+    },
+    {
+      name: 'Салбар 2 — Баянзүрх дүүрэг',
+      slots: [
+        { day: 'Даваа', time: '15:00–16:30', cls: 'Хүүхдийн анхан шат', level: '5–10 нас' },
+        { day: 'Даваа', time: '17:00–18:30', cls: 'Латин дебют', level: 'Шинэ сурагчид' },
+        { day: 'Мягмар', time: '16:00–17:30', cls: 'Ча-ча-ча · Румба', level: 'Дунд шат' },
+        { day: 'Мягмар', time: '18:00–19:30', cls: 'Самба · Пасодобль', level: 'Дэвшилтэт' },
+        { day: 'Лхагва', time: '15:00–16:00', cls: 'Хүүхдийн Валс', level: '8–14 нас' },
+        { day: 'Лхагва', time: '16:30–18:30', cls: 'Стандарт дасгал', level: 'Тэмцээний бэлтгэл' },
+        { day: 'Пүрэв', time: '17:00–18:30', cls: 'Жайв · Танго', level: 'Дунд шат' },
+        { day: 'Пүрэв', time: '19:00–20:30', cls: 'Насанд хүрэгчид', level: 'Бүх түвшин' },
+        { day: 'Баасан', time: '15:30–17:30', cls: 'Нийт дасгал', level: 'Бүх ангиуд' },
+      ]
+    },
+    {
+      name: 'Салбар 3 — Сүхбаатар дүүрэг',
+      slots: [
+        { day: 'Даваа', time: '16:00–17:00', cls: 'Хүүхдийн дебют', level: '4–8 нас' },
+        { day: 'Даваа', time: '17:30–19:00', cls: 'Латин анхан шат', level: 'Шинэ сурагчид' },
+        { day: 'Мягмар', time: '15:30–17:00', cls: 'Ча-ча-ча', level: 'Анхан · Дунд' },
+        { day: 'Мягмар', time: '17:30–19:00', cls: 'Румба · Жайв', level: 'Дунд шат' },
+        { day: 'Лхагва', time: '16:00–18:00', cls: 'Формейшн бэлтгэл', level: 'Шилэгдсэн баг' },
+        { day: 'Пүрэв', time: '16:00–17:30', cls: 'Валс · Фокстрот', level: 'Стандарт дунд' },
+        { day: 'Пүрэв', time: '18:00–19:30', cls: 'Насанд хүрэгчид', level: 'Сонгодог бүжиг' },
+        { day: 'Баасан', time: '15:00–16:30', cls: 'Хүүхдийн дасгал', level: 'Нийт хүүхдүүд' },
+        { day: 'Баасан', time: '17:00–19:00', cls: 'Нийт нэгтгэл', level: 'Тэмцээний баг' },
+      ]
+    }
+  ];
+
+  let selectedSlots = new Set();
+  let currentStep = 0;
+
+  function updateSlots() {
+    const bi = document.getElementById('sel-branch').value;
+    const group = document.getElementById('slots-group');
+    const grid = document.getElementById('slot-grid');
+    selectedSlots.clear();
+    if (bi === '') { group.style.display = 'none'; return; }
+    group.style.display = 'block';
+    const branch = BRANCHES[parseInt(bi)];
+    grid.innerHTML = branch.slots.map((s, i) =>
+      `<button class="slot-btn" onclick="toggleSlot(this,${i})" data-i="${i}">
+        <span style="color:var(--gold);font-family:'Space Mono',monospace;font-size:0.55rem;">${s.day} · ${s.time}</span>
+        <span class="slot-class">${s.cls}</span>
+        <span style="color:var(--muted);font-family:'Space Mono',monospace;font-size:0.5rem;">${s.level}</span>
+      </button>`
+    ).join('');
+  }
+
+  function toggleSlot(btn, i) {
+    if (selectedSlots.has(i)) { selectedSlots.delete(i); btn.classList.remove('selected'); }
+    else { selectedSlots.add(i); btn.classList.add('selected'); }
+  }
+
+  function nextStep(to) {
+    // Validate
+    if (to === 1) {
+      const bi = document.getElementById('sel-branch').value;
+      if (!bi) { alert('Салбараа сонгоно уу.'); return; }
+      if (selectedSlots.size === 0) { alert('Хамгийн багадаа нэг хичээлийн цаг сонгоно уу.'); return; }
+    }
+    if (to === 2) {
+      const last = document.getElementById('inp-last').value.trim();
+      const first = document.getElementById('inp-first').value.trim();
+      const age = document.getElementById('inp-age').value.trim();
+      const phone = document.getElementById('inp-phone').value.trim();
+      if (!last || !first) { alert('Овог нэрээ бүрэн оруулна уу.'); return; }
+      if (!age || age < 3 || age > 99) { alert('Насаа зөв оруулна уу.'); return; }
+      if (!phone) { alert('Утасны дугаараа оруулна уу.'); return; }
+      buildSummary();
+    }
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    document.getElementById('ind-' + currentStep).classList.remove('active');
+    document.getElementById('ind-' + currentStep).classList.add('done');
+    currentStep = to;
+    document.getElementById('step-' + currentStep).classList.add('active');
+    document.getElementById('ind-' + currentStep).classList.add('active');
+    document.getElementById('ind-' + currentStep).classList.remove('done');
+  }
+
+  function buildSummary() {
+    const bi = parseInt(document.getElementById('sel-branch').value);
+    const branch = BRANCHES[bi];
+    const last = document.getElementById('inp-last').value.trim();
+    const first = document.getElementById('inp-first').value.trim();
+    const age = document.getElementById('inp-age').value.trim();
+    const phone = document.getElementById('inp-phone').value.trim();
+    const slots = [...selectedSlots].map(i => `${branch.slots[i].day} ${branch.slots[i].time} — ${branch.slots[i].cls}`).join('<br>');
+    document.getElementById('summary-box').innerHTML = `
+      <div class="summary-row"><span>НЭР</span><span>${last} ${first}</span></div>
+      <div class="summary-row"><span>НАС</span><span>${age} нас</span></div>
+      <div class="summary-row"><span>УТАС</span><span>${phone}</span></div>
+      <div class="summary-row"><span>САЛБАР</span><span>${branch.name}</span></div>
+      <div class="summary-row"><span>ХИЧЭЭЛҮҮД</span><span style="text-align:right;font-size:0.85rem;line-height:1.8;">${slots}</span></div>
+    `;
+  }
+
+  function submitReg() {
+    const id = 'MD-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+    document.getElementById('reg-success').classList.add('show');
+    document.getElementById('success-id').textContent = 'БҮРТГЭЛИЙН ДУГААР: ' + id;
+    document.querySelector('.form-steps').style.display = 'none';
+    document.getElementById('step-2').style.display = 'none';
+    document.getElementById('step-2').classList.remove('active');
+  }
+
+  function resetForm() {
+    currentStep = 0;
+    selectedSlots.clear();
+    document.getElementById('sel-branch').value = '';
+    document.getElementById('slots-group').style.display = 'none';
+    ['inp-last','inp-first','inp-age','inp-phone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('inp-source').value = '';
+    document.getElementById('reg-success').classList.remove('show');
+    document.querySelector('.form-steps').style.display = 'flex';
+    for(let i=0;i<3;i++){
+      document.getElementById('ind-'+i).classList.remove('active','done');
+      const s = document.getElementById('step-'+i);
+      s.style.display = '';
+      s.classList.remove('active');
+    }
+    document.getElementById('ind-0').classList.add('active');
+    document.getElementById('step-0').classList.add('active');
+  }
+  // ─── END REGISTRATION ───
+
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.style.opacity = '1'; });
   }, {threshold: 0.1});
@@ -967,3 +1538,4 @@
   });
 </script>
 </body>
+</html>
